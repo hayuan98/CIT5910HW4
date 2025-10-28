@@ -71,8 +71,10 @@ public class Scores {
         Score = getPoint(hand1Index) + getPoint(hand2Index) + getPoint(hand3Index)
                 + getPoint(hand4Index) + getPoint(hand5Index) + getPoint(hand6Index)
                 + getPoint(hand7Index) + getPoint(hand8Index) + getPoint(hand9Index);
+    }
 
-        System.out.print(Score);
+    public int getScore() {
+        return Score;
     }
 
     public int[] getHand1Index() {
@@ -133,11 +135,7 @@ public class Scores {
                 valueToUse = valueMax;
             }
         }
-//        if (valueMax > 21 && valueMin < 21){
-//            valueToUse = valueMin;
-//        } else {
-//            valueToUse = valueMax;
-//        }
+
         if (valueToUse > 21) {
             pointCounter = 0;
         } else if (valueToUse == 21) {
