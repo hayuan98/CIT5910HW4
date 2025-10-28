@@ -72,8 +72,38 @@ public class Scores {
                 + getPoint(hand4Index) + getPoint(hand5Index) + getPoint(hand6Index)
                 + getPoint(hand7Index) + getPoint(hand8Index) + getPoint(hand9Index);
 
-        System.out.println(Score);
+        System.out.print(Score);
     }
+
+    public int[] getHand1Index() {
+        return hand1Index;
+    }
+
+    public int[] getHand2Index() {
+        return hand1Index;
+    }
+    public int[] getHand3Index() {
+        return hand1Index;
+    }
+    public int[] getHand4Index() {
+        return hand1Index;
+    }
+    public int[] getHand5Index() {
+        return hand1Index;
+    }
+    public int[] getHand6Index() {
+        return hand1Index;
+    }
+    public int[] getHand7Index() {
+        return hand1Index;
+    }
+    public int[] getHand8Index() {
+        return hand1Index;
+    }
+    public int[] getHand9Index() {
+        return hand1Index;
+    }
+
 
     public int getPoint (int[] handIndex) {
         int valueMax = 0;
@@ -82,8 +112,8 @@ public class Scores {
         int pointCounter = 0;
         for (int i = 0; i < handIndex.length; i++){
             Card cardHolder = new Card(handIndex[i]);
-            valueMax += cardHolder.getCardValueMax();
-            valueMax += cardHolder.getCardValueMin();
+            valueMax = valueMax + cardHolder.getCardValueMax();
+            valueMin = valueMin + cardHolder.getCardValueMin();
         }
         if (valueMax > 21 && valueMin < 21){
             valueToUse = valueMin;
@@ -93,7 +123,11 @@ public class Scores {
         if (valueToUse > 21) {
             pointCounter = 0;
         } else if (valueToUse == 21) {
-            pointCounter = 7;
+            if (handIndex.length == 2){
+                pointCounter = 10;
+            } else {
+                pointCounter = 7;
+            }
         } else if (valueToUse == 20) {
             pointCounter = 5;
         } else if (valueToUse == 19) {

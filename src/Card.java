@@ -16,20 +16,16 @@ public class Card {
         int cardIndexB = 0;
         if (y % 4 == 0) {
             suitOfCard = "S";
-            cardIndexA = y % 4;
         } else if (y % 4 == 1) {
             suitOfCard = "H";
-            cardIndexA = y % 4;
         } else if (y % 4 == 2) {
             suitOfCard = "C";
-            cardIndexA = y % 4;
         } else {
             suitOfCard = "D";
-            cardIndexA = y % 4;
         }
-
+        cardIndexA = y / 13;
         int remainder = y % 13;
-        cardIndexB = 13;
+        cardIndexB = remainder;
         if (remainder == 0) {
             numOfCard = "K";
             cardValueMax = 10;
@@ -44,7 +40,7 @@ public class Card {
             cardValueMin = 10;
         } else if (remainder == 1) {
             numOfCard = "A";
-            cardValueMax = 10;
+            cardValueMax = 11;
             cardValueMin = 1;
         } else {
             numOfCard = String.valueOf(remainder);

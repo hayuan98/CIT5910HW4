@@ -4,6 +4,8 @@ import java.util.Arrays;
 public class TheBoard {
     private String[][] TheBoard;
     private int [][]  cardTracker;
+    private int errorTracker;
+    private int cardCount;
 
     public TheBoard () {
         TheBoard = new String[5][5];
@@ -39,66 +41,42 @@ public class TheBoard {
         cardTracker = new int[4][5];
     }
 
-//    public String getValue (int location) {
-//        int a;
-//        int b;
-//        if (location < 0 || location > 20) {
-//            String invalidInputMessage= "Invalid spot. If you would like to discard the card, please enter a number between 17-20; otherwise please enter a number between 1-16.";
-//            return invalidInputMessage;
-//        } else if (location <= 16) {
-//            if (location <= 10) {
-//                a = location / 6;
-//                b = location % 6 - 1;
-//            } else if (location <= 13) {
-//                a = location / 10 + 1;
-//                b = location % 10;
-//            } else {
-//                a = location / 10 + 2;
-//                b = location % 10 - 3;
-//            }
-//            return TheBoard[a][b];
-//        } else {
-//            int discardCount = 0;
-//            for (int i = 1; i < 5; i++){
-//                String currentValue = TheBoard[4][i];
-//                String originalValue = " " + Integer.toString(4 * 4 + i) + " ";
-//                if (!currentValue.equals(originalValue)){
-//                    discardCount++;
-//                }
-//            }
-//            int discardsRemaining = 4 - discardCount;
-//            return "Discards remaining: " + Integer.toString(discardsRemaining) +".";
-//        }
-//    }
-
     public void placeCard ( int currentLoc, Card currentCard){
         int i = 0;
         int j = 0;
+        errorTracker = 0;
         String originalValue;
         if (currentLoc<10) {
             originalValue = " 0" + Integer.toString(currentLoc) + " ";
         } else {
             originalValue = " " + Integer.toString(currentLoc) + " ";
         }
-        if (currentLoc < 0 || currentLoc > 20) {
-            System.out.println("Invalid spot. If you would like to discard the card, please enter a number between 17-20; otherwise please enter a number between 1-16.");
+        if (currentLoc <= 0 || currentLoc > 20) {
+            System.out.println("Invalid spot. If you would like to discard the card, please enter a number " +
+                    "between 17-20; otherwise please enter a number between 1-16.");
+            errorTracker++;
         } else if (currentLoc <= 16) {
-            if (currentLoc <= 10) {
-                i = currentLoc / 6;
-                j = currentLoc % 6 - 1;
-            } else if (currentLoc <= 13) {
-                i = currentLoc / 10 + 1;
-                j = currentLoc % 10;
-            } else {
-                i = currentLoc / 10 + 2;
-                j = currentLoc % 10 - 3;
+            if (currentLoc == 5 || currentLoc == 10){
+                i = currentLoc / 5 - 1;
+                j = 4;
+            } else if (currentLoc < 10){
+                i = currentLoc / 5;
+                j = currentLoc % 5 - 1;
+            } else if (currentLoc >=11 && currentLoc <=13) {
+                i = 2;
+                j = currentLoc - 10;
+            } else if (currentLoc >= 14 && currentLoc <= 16) {
+                i = 3;
+                j = currentLoc - 13;
             }
             String currentValue = TheBoard[i][j];
             if (currentValue.equals(originalValue)) {
                 TheBoard[i][j] = currentCard.getCardNumSuit();
                 cardTracker[i][j] = currentCard.getIndexOfCard();
+                cardCount++;
             } else {
                 System.out.println("Unable to place two cards in the same spot. Please choose another spot.");
+                errorTracker++;
             }
         } else {
             if (currentLoc == 17){
@@ -129,6 +107,7 @@ public class TheBoard {
                 System.out.println("Discards remaining: " + Integer.toString(discardsRemaining) +".");
             } else {
                 System.out.println("Unable to place two cards in the same spot. Please choose another spot.");
+                errorTracker++;
             }
         }
 
@@ -143,7 +122,24 @@ public class TheBoard {
         }
     }
 
+    public void printTheTracker() {
+        for (int i = 0; i < 4; i++){
+            for (int j = 0; j < 4; j++){
+                System.out.print(cardTracker[i][j]+ " ");
+            }
+            System.out.println(cardTracker[i][4]);
+        }
+    }
+
     public int[][] getCardTracker () {
         return cardTracker;
+    }
+
+    public int getErrorTracker() {
+        return errorTracker;
+    }
+
+    public int getCardCount() {
+        return cardCount;
     }
 }
