@@ -110,16 +110,34 @@ public class Scores {
         int valueMin = 0;
         int valueToUse = 0;
         int pointCounter = 0;
-        for (int i = 0; i < handIndex.length; i++){
-            Card cardHolder = new Card(handIndex[i]);
-            valueMax = valueMax + cardHolder.getCardValueMax();
-            valueMin = valueMin + cardHolder.getCardValueMin();
+        int digitCount = 0;
+        while(digitCount != handIndex.length){
+            for (int i = 0; i < handIndex.length; i++){
+                Card cardHolder = new Card(handIndex[i]);
+                valueMax = valueMax + cardHolder.getCardValueMax();
+                valueMin = valueMin + cardHolder.getCardValueMin();
+                digitCount++;
+            }
+            if (valueMax!= valueMin) {
+                int difference = valueMax - valueMin; // if diff exists, it's caused by Ace card(s)
+                int aceCount = difference / 10;  // to check how many Ace(s) are there in this hand
+                for (int i = 0; i < aceCount; i++) { // count Ace as 1 instead of 11 to reduce valueMax
+                    if (valueMax > 21) {
+                        valueMax = valueMax - 10;
+                        valueToUse = valueMax;
+                    } else {
+                        valueToUse = valueMax;
+                    }
+                }
+            } else {
+                valueToUse = valueMax;
+            }
         }
-        if (valueMax > 21 && valueMin < 21){
-            valueToUse = valueMin;
-        } else {
-            valueToUse = valueMax;
-        }
+//        if (valueMax > 21 && valueMin < 21){
+//            valueToUse = valueMin;
+//        } else {
+//            valueToUse = valueMax;
+//        }
         if (valueToUse > 21) {
             pointCounter = 0;
         } else if (valueToUse == 21) {
