@@ -19,6 +19,10 @@ public class Deck {
         return standardDeck.get(i);
     }
 
+    public void dealACard () {
+        standardDeck.remove(0);
+    }
+
     public void printDeck () {
         System.out.println(standardDeck);
     }
