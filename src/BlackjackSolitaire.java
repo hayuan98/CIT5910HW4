@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class BlackjackSolitaire {
     private TheBoard userGameBoard;
     private Deck userGameDeck;
-    private Scores userScore;
+    private Score userScore;
 
     public BlackjackSolitaire () {
         userGameDeck = new Deck();
@@ -13,6 +13,7 @@ public class BlackjackSolitaire {
     public void play (){
         System.out.println("Welcome to the BlackJack Solitaire Game!");
         System.out.println("Getting the game ready...");
+        userGameBoard.printTheBoard();
         while (userGameBoard.getCardCount()< 16) {
             Card currentCard = new Card(userGameDeck.getIndexOfCard(0));
             System.out.println();
@@ -36,7 +37,7 @@ public class BlackjackSolitaire {
         }
 
         System.out.println();
-        userScore = new Scores(userGameBoard);
+        userScore = new Score(userGameBoard);
         System.out.print("You have finished the game! Your score is: " + userScore.getScore() +". Congratulations!");
         System.out.println();
         userGameBoard.printTheTracker();

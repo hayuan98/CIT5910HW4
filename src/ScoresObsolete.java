@@ -1,6 +1,4 @@
-import java.util.ArrayList;
-
-public class Scores {
+public class ScoresObsolete {
     private int Score;
     int[] hand1Index = new int[5];
     int[] hand2Index = new int[5];
@@ -12,7 +10,7 @@ public class Scores {
     int[] hand8Index = new int[4];
     int[] hand9Index = new int[2];
 
-    public Scores(TheBoard userBoard) {
+    public ScoresObsolete(TheBoard userBoard) {
         int[][] cardTracker = userBoard.getCardTracker();
 
         for (int i = 0; i < 1; i++) {

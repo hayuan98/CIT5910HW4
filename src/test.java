@@ -31,14 +31,14 @@ public class test {
         testBoard.printTheBoard();
         testDeck.dealACard();
 
-        Card testCard4 = new Card(40); //
+        Card testCard4 = new Card(40); // intentionally putting multiple Aces in one hand
         System.out.println(testCard4.getCardNumSuit());
 
         testBoard.placeCard(4,testCard4);
         testBoard.printTheBoard();
         testDeck.dealACard();
 
-        Card testCard5 = new Card(33); // intentionally setting number as 7 so that can test scoring mechanism of multiple Aces
+        Card testCard5 = new Card(testDeck.getIndexOfCard(0));
         System.out.println(testCard5.getCardNumSuit());
 
         testBoard.placeCard(5,testCard5);
@@ -123,31 +123,34 @@ public class test {
         testBoard.placeCard(16,testCard16);
         testBoard.printTheBoard();
         System.out.println("card count is " + testBoard.getCardCount());
-        System.out.print("the score is: ");
-        Scores finalScore = new Scores(testBoard);
+        ScoresObsolete finalScore = new ScoresObsolete(testBoard);
+        System.out.print("the score is: " + finalScore.getScore());
         System.out.println();
 
         testBoard.printTheTracker();
         System.out.println();
+
+        Score score = new Score(testBoard);
+        System.out.println("the score under new score system is: " + score.getScore());
         //test score mechanism:
-        int testHand1Point = finalScore.getPoint(finalScore.hand1Index);
-        System.out.println(testHand1Point);
-        int testHand2Point = finalScore.getPoint(finalScore.hand2Index);
-        System.out.println(testHand2Point);
-        int testHand3Point = finalScore.getPoint(finalScore.hand3Index);
-        System.out.println(testHand3Point);
-        int testHand4Point = finalScore.getPoint(finalScore.hand4Index);
-        System.out.println(testHand4Point);
-        int testHand5Point = finalScore.getPoint(finalScore.hand5Index);
-        System.out.println(testHand5Point);
-        int testHand6Point = finalScore.getPoint(finalScore.hand6Index);
-        System.out.println(testHand6Point);
-        int testHand7Point = finalScore.getPoint(finalScore.hand7Index);
-        System.out.println(testHand7Point);
-        int testHand8Point = finalScore.getPoint(finalScore.hand8Index);
-        System.out.println(testHand8Point);
-        int testHand9Point = finalScore.getPoint(finalScore.hand9Index);
-        System.out.println(testHand9Point);
+//        int testHand1Point = finalScore.getPoint(finalScore.hand1Index);
+//        System.out.println(testHand1Point);
+//        int testHand2Point = finalScore.getPoint(finalScore.hand2Index);
+//        System.out.println(testHand2Point);
+//        int testHand3Point = finalScore.getPoint(finalScore.hand3Index);
+//        System.out.println(testHand3Point);
+//        int testHand4Point = finalScore.getPoint(finalScore.hand4Index);
+//        System.out.println(testHand4Point);
+//        int testHand5Point = finalScore.getPoint(finalScore.hand5Index);
+//        System.out.println(testHand5Point);
+//        int testHand6Point = finalScore.getPoint(finalScore.hand6Index);
+//        System.out.println(testHand6Point);
+//        int testHand7Point = finalScore.getPoint(finalScore.hand7Index);
+//        System.out.println(testHand7Point);
+//        int testHand8Point = finalScore.getPoint(finalScore.hand8Index);
+//        System.out.println(testHand8Point);
+//        int testHand9Point = finalScore.getPoint(finalScore.hand9Index);
+//        System.out.println(testHand9Point);
 
 
 
